@@ -35,3 +35,34 @@ app.post('/', (req, res) => {
   console.log(error)
  })
 })
+
+// Reading a Uder from AddressBook
+app.get('/:id', (req, res) =>{
+ Address.findById(req.params.id, (err, user) =>{
+  res.send(user)
+ })
+})
+
+// Updating the User
+app.post('/update/:id', (req, res) => {
+ let address = {}
+ if (req.body.name) address.name = req.body.name
+ if (req.body.email) address.email = req.body.email
+ if (req.body.phone) address.phone = req.body.phone
+ if (req.body.place) address.place = req.body.placeaddress = { $set: address }
+
+ Address.update({_id: req.params.id}, address).then(() => {
+  res.send(address)
+ }).catch((err) => {
+  console.log(error)
+ })
+})
+
+// Deleting the User from AddressBook
+app.delete('/delete/:id', (req, res) => {
+ Address.remove({_id: req.params.id}).then(() => {
+  res.send('user deleted')
+ }).catch((err) => {
+  console.log(error)
+ })
+})
