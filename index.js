@@ -1,6 +1,8 @@
+// Require mongoose in our app
+const mongoose = require('mongoose');
+
 const express = require('express')//Initialize express app
 const app = express();//Initialize the sever
-const mongoose = require('mongoose')// Require mongoose in our app
 app.listen(3000, () => {
     console.log('sever listening on port:3000');
 });
